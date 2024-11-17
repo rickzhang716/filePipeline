@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>example_launchagent</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>EnvironmentVariables</key>
+    <dict>
+           <key>SRC_DIR</key>
+           <string>~/Downloads/</string>
+           <key>DEST_DIR</key>
+           <string>path/to/Destination/</string>
+            <key>PYTHON_PATH</key>
+           <string>path/to/venv</string>
+
+    </dict>
+   
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/python3</string>
+        <string>path/to/file_pipeline.py</string>
+    </array>
+    <key>StandardOutPath</key>
+    <string>path/to/file_pipeline.log</string>
+    <key>StandardErrorPath</key>
+    <string>path/to/file_pipeline_error.log</string>
+    <key>KeepAlive</key>
+    <true/>
+    
+</dict>
+</plist>

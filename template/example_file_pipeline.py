@@ -1,12 +1,11 @@
 """
-A CI/CD for my resume.
+Create a pipeline that runs on file download.
 """
 
-import os.path
+import os
+import sys
 from pathlib import Path
 import logging
-import sys
-
 
 pythonpath = os.getenv("PYTHON_PATH")
 sys.path.append(pythonpath)
@@ -23,12 +22,15 @@ handler = logging.StreamHandler(sys.stdout)
 handler.setLevel(logging.DEBUG)
 logger.addHandler(handler)
 
-pattern = re.compile("Rick Zhang Resume.*pdf$")
-src_directory = Path(os.getenv("RESUME_SRC"))
+
+# check for a pattern. Replace this with whatever regex you'd like to search for.
+pattern = re.compile("PATTERN TO MATCH.*pdf$")
+src_directory = Path(os.getenv("SRC_DIR"))
 src_directory = src_directory.expanduser().resolve()
 
-dest_directory = Path(os.getenv("RESUME_DEST"))
+dest_directory = Path(os.getenv("DEST_DIR"))
 dest_directory = str(dest_directory.expanduser().resolve())
+
 counter = 0
 
 
@@ -40,9 +42,7 @@ def move_file(event):
         file_name = file_name.replace(" ", "\\ ")
         file_name = file_name.replace("(", "\\(")
         file_name = file_name.replace(")", "\\)")
-        exit_status = os.system(
-            f"mv {src_directory}/{file_name}  {dest_directory}"
-        )  # noqa
+        exit_status = os.system(f"mv {src_directory}/{file_name}  {dest_directory}")
         if exit_status == 0:
             counter += 1
             logger.info(
